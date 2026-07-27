@@ -1,5 +1,5 @@
-import type { Difficulty, Platform } from '../types'
-import styles from './FilterBar.module.css'
+import type { Difficulty, Platform } from '../types';
+import styles from './FilterBar.module.css';
 
 interface FilterBarProps {
     searchQuery: string;
@@ -20,15 +20,14 @@ function FilterBar({
     selectedPlatform,
     onPlatformChange,
 }: FilterBarProps) {
-
     return (
-        <div className='styles.filterBar'>
-
+        <div className={styles.filterBar}>
             <input
                 type="text"
                 value={searchQuery}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    onSearchChange(e.target.value)}
+                    onSearchChange(e.target.value)
+                }
                 placeholder="문제 제목 검색..."
                 className={styles.searchInput}
             />
@@ -36,7 +35,8 @@ function FilterBar({
             <select
                 value={selectedDifficulty}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    onDifficultyChange(e.target.value as Difficulty | 'all')}
+                    onDifficultyChange(e.target.value as Difficulty | 'all')
+                }
                 className={styles.select}
             >
                 <option value="all">모든 난이도</option>
@@ -48,7 +48,8 @@ function FilterBar({
             <select
                 value={selectedPlatform}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    onPlatformChange(e.target.value as Platform | 'all')}
+                    onPlatformChange(e.target.value as Platform | 'all')
+                }
                 className={styles.select}
             >
                 <option value="all">모든 플랫폼</option>
@@ -57,7 +58,7 @@ function FilterBar({
                 <option value="LeetCode">LeetCode</option>
             </select>
         </div>
-    )
+    );
 }
 
 export default FilterBar;

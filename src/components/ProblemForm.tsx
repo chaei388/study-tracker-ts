@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-
-// import styles from './ProblemForm.module.css';
+import type { Problem, Difficulty, Platform } from '../types';
+import styles from './ProblemForm.module.css';
 
 interface ProblemFormProps {
     onAdd: (problem: Omit<Problem, 'id'>) => void;
     editingProblem: Problem | null;
     onUpdate: (problem: Problem) => void;
-    onCancelEdit: ) => void;
+    onCancelEdit: () => void;
 }
 
 const emptyForm = () => ({
     title: '',
     difficulty: 'medium' as Difficulty,
-    plasform: '백준' as Platform,
+    platform: '백준' as Platform,
     solvedAt: new Date().toISOString().split('T')[0],
     timeSpent: '',
     tags: '',
     memo: '',
     url: '',
-})
+});
 
 export default function ProblemForm({
     onAdd,
@@ -29,14 +29,15 @@ export default function ProblemForm({
     const [form, setForm] = useState(emptyForm);
     const titleInputRef = useRef<HTMLInputElement>(null);
 
-    //수정모드 -> 기존 값으로 폼 채우기
-
+    // 수정 모드 -> 기존 값으로 폼 채우기
     useEffect(() => {
         if (editingProblem) {
+            // 편집 대상이 바뀔 때 입력 폼을 기존 문제 값으로 동기화한다.
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setForm({
                 title: editingProblem.title,
                 difficulty: editingProblem.difficulty,
-                plasform: editingProblem.platform,
+                platform: editingProblem.platform,
                 solvedAt: editingProblem.solvedAt,
                 timeSpent: editingProblem.timeSpent?.toString() || '',
                 tags: editingProblem.tags.join(', '),
@@ -75,12 +76,11 @@ export default function ProblemForm({
         titleInputRef.current?.focus();
     };
 
-    const handelCancel = () => {
+    const handleCancel = () => {
         setForm(emptyForm());
         onCancelEdit();
         titleInputRef.current?.focus();
     };
-
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -88,7 +88,7 @@ export default function ProblemForm({
 
             <div className={styles.row}>
                 <div className={styles.field}>
-                    <label> 문제 제목 *</label>
+                    <label>문제 제목 *</label>
                     <input
                         ref={titleInputRef}
                         type="text"
@@ -159,8 +159,8 @@ export default function ProblemForm({
                 <input
                     type="text"
                     value={form.tags}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)
-                        => setForm({ ...form, tags: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setForm({ ...form, tags: e.target.value })
                     }
                     placeholder="DP, 그리디, 구현"
                 />
@@ -170,7 +170,8 @@ export default function ProblemForm({
                 <label>메모</label>
                 <textarea
                     value={form.memo}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, memo: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                        setForm({ ...form, memo: e.target.value })
                     }
                     placeholder="풀이 방법, 느낀 점 등"
                     rows={4}
@@ -182,10 +183,10 @@ export default function ProblemForm({
                 <input
                     type="url"
                     value={form.url}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)
-                        => setForm({ ...form, url: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setForm({ ...form, url: e.target.value })
                     }
-                    placeholder="http://..."
+                    placeholder="https://..."
                 />
             </div>
 
@@ -196,8 +197,9 @@ export default function ProblemForm({
                 {editingProblem && (
                     <button
                         type="button"
-                        onClick={handelCancel}
-                        className={styles.cancelBtn}>
+                        onClick={handleCancel}
+                        className={styles.cancelBtn}
+                    >
                         취소
                     </button>
                 )}

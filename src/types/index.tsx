@@ -2,7 +2,6 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
 // 플랫폼 (셋 중 하나)
-
 export type Platform = '백준' | '프로그래머스' | 'LeetCode';
 
 // 문제 1건
