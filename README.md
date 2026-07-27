@@ -1,75 +1,46 @@
-# React + TypeScript + Vite
+# 코딩테스트 학습 기록 앱
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React day4 팀프로젝트 실습: 코딩테스트 문제 풀이 기록 앱
+문제를 추가, 조회, 수정, 삭제할 수 있고 제목 검색과 난이도/플랫폼 필터를 사용할 수 있다.
 
-Currently, two official plugins are available:
+## 주요 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 문제 풀이 기록 추가
+- 문제 목록 조회
+- 문제 수정 및 삭제
+- 제목 검색
+- 난이도 필터
+- 플랫폼 필터
+- 난이도별 통계 표시
+- localStorage 저장
 
-## React Compiler
+## 사용 기술
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- CSS Module
+- Vite
 
-## Expanding the ESLint configuration
+## 폴더 구조
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+study-tracker-ts/
+├── src/
+│   ├── types/
+│   │   └── index.tsx
+│   ├── components/
+│   │   ├── Header.tsx / Header.module.css
+│   │   ├── ProblemForm.tsx / ProblemForm.module.css
+│   │   ├── ProblemCard.tsx / ProblemCard.module.css
+│   │   ├── FilterBar.tsx / FilterBar.module.css
+│   │   └── ProblemList.tsx / ProblemList.module.css
+│   ├── App.tsx
+│   └── App.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 실행 방법
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
